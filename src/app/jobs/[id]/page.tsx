@@ -80,7 +80,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
+                {tags.map((tag: string) => (
                   <span key={tag} className={`text-sm px-3 py-1 rounded-md ${tagColors[tag.trim()] || 'bg-gray-900/40 text-gray-400'}`}>
                     {tag.trim()}
                   </span>
@@ -114,7 +114,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             <div className="rounded-xl p-8" style={{ backgroundColor: '#111118', border: '1px solid rgba(168, 85, 247, 0.15)' }}>
               <h2 className="text-xl font-bold text-white mb-4">応募要件</h2>
               <ul className="space-y-3">
-                {requirements.map((req) => (
+                {requirements.map((req: string) => (
                   <li key={req} className="flex items-start gap-3 text-gray-400">
                     <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#a855f7' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -129,7 +129,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             <div className="rounded-xl p-8" style={{ backgroundColor: '#111118', border: '1px solid rgba(168, 85, 247, 0.15)' }}>
               <h2 className="text-xl font-bold text-white mb-4">福利厚生・待遇</h2>
               <div className="flex flex-wrap gap-2">
-                {benefits.map((benefit) => (
+                {benefits.map((benefit: string) => (
                   <span key={benefit} className="text-sm px-3 py-2 rounded-lg text-gray-300"
                         style={{ backgroundColor: 'rgba(168, 85, 247, 0.1)', border: '1px solid rgba(168, 85, 247, 0.2)' }}>
                     {benefit.trim()}
