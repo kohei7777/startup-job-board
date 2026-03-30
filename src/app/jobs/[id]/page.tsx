@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ApplicationForm from '@/components/ApplicationForm'
@@ -26,9 +26,11 @@ const tagColors: Record<string, string> = {
 
 export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const job = await prisma.job.findUnique({
-    where: { id: parseInt(id) },
-  })
+  const { data: job } = await supabase
+    .from('Job')
+    .select('*')
+    .eq('id', parseInt(id))
+    .single()
 
   if (!job) {
     notFound()

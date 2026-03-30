@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { supabase } from '@/lib/supabase'
 import JobCard from '@/components/JobCard'
 import JobFilters from '@/components/JobFilters'
 import { Suspense } from 'react'
@@ -13,36 +13,33 @@ interface SearchParams {
 }
 
 async function getJobs(searchParams: SearchParams) {
-  const where: Record<string, unknown> = {}
+  let query = supabase
+    .from('Job')
+    .select('*')
+    .order('featured', { ascending: false })
+    .order('createdAt', { ascending: false })
 
   if (searchParams.keyword) {
-    where.OR = [
-      { title: { contains: searchParams.keyword } },
-      { company: { contains: searchParams.keyword } },
-      { description: { contains: searchParams.keyword } },
-    ]
+    query = query.or(
+      `title.ilike.%${searchParams.keyword}%,company.ilike.%${searchParams.keyword}%,description.ilike.%${searchParams.keyword}%`
+    )
   }
-
   if (searchParams.jobType) {
-    where.jobType = searchParams.jobType
+    query = query.eq('jobType', searchParams.jobType)
   }
-
   if (searchParams.industry) {
-    where.industry = searchParams.industry
+    query = query.eq('industry', searchParams.industry)
   }
-
   if (searchParams.salary) {
-    where.salaryMin = { gte: parseInt(searchParams.salary) }
+    query = query.gte('salaryMin', parseInt(searchParams.salary))
   }
-
   if (searchParams.stage) {
-    where.stage = searchParams.stage
+    query = query.eq('stage', searchParams.stage)
   }
 
-  return await prisma.job.findMany({
-    where,
-    orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }],
-  })
+  const { data, error } = await query
+  if (error) throw new Error(error.message)
+  return data ?? []
 }
 
 export default async function HomePage({
