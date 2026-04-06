@@ -23,12 +23,14 @@ export default function Header() {
             <Link href="#about" className="text-gray-300 hover:text-white transition-colors text-sm">
               高野秀敏について
             </Link>
-            <Link href="#login" className="text-gray-300 hover:text-white transition-colors text-sm">
-              ログイン
+            <Link href="/for-companies" className="text-gray-300 hover:text-white transition-colors text-sm">
+              企業様へ
             </Link>
-            <button className="px-4 py-2 rounded-md text-sm font-medium text-white transition-all" style={{ background: 'linear-gradient(135deg, #e91e63, #f06292)' }}>
-              無料登録
-            </button>
+            <Link href="/for-companies#contact"
+               className="px-4 py-2 rounded-md text-sm font-medium text-white transition-all hover:opacity-90"
+               style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
+              採用相談（無料）
+            </Link>
           </nav>
 
           <button className="md:hidden text-gray-300">
