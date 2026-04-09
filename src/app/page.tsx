@@ -61,30 +61,31 @@ export default async function HomePage({
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6"
                style={{ backgroundColor: 'rgba(124, 58, 237, 0.15)', border: '1px solid rgba(168, 85, 247, 0.3)', color: '#c084fc' }}>
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-            スタートアップ特化型求人プラットフォーム
+            スタートアップ・ベンチャー特化型 転職支援プラットフォーム
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            幹部採用なら、<br />
+            次のキャリアを、<br />
             <span style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7, #c084fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              キープレイヤーズダイレクト
+              高野秀敏と一緒に。
             </span>
           </h1>
 
           <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
-            11,000件以上のキャリア面談実績を持つ高野秀敏が、あなたのキャリアを直接サポート。<br />
+            11,000件以上のキャリア面談実績を持つ高野秀敏が、あなたの転職を直接サポート。<br />
             スタートアップ・ベンチャーの幹部ポジションに特化した求人をご紹介します。
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#jobs" className="px-8 py-4 rounded-lg font-semibold text-white transition-all hover:opacity-90"
                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
-              求人を探す
+              求人を見る
             </a>
-            <button className="px-8 py-4 rounded-lg font-semibold text-white transition-all hover:bg-white/10"
-                    style={{ border: '1px solid rgba(255,255,255,0.3)' }}>
+            <a href="https://keyplayers.jp" target="_blank" rel="noopener noreferrer"
+               className="px-8 py-4 rounded-lg font-semibold text-white transition-all hover:bg-white/10"
+               style={{ border: '1px solid rgba(255,255,255,0.3)' }}>
               無料キャリア相談
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -165,12 +166,13 @@ export default async function HomePage({
       <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <div className="rounded-2xl p-12" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(168, 85, 247, 0.1))', border: '1px solid rgba(168, 85, 247, 0.3)' }}>
-            <h2 className="text-3xl font-bold text-white mb-4">幹部採用をお考えですか？</h2>
-            <p className="text-gray-400 mb-8">キープレイヤーズダイレクトが、あなたの採用課題を解決します。</p>
-            <button className="px-8 py-4 rounded-lg font-semibold text-white transition-all hover:opacity-90"
-                    style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
-              企業向け採用相談はこちら
-            </button>
+            <h2 className="text-3xl font-bold text-white mb-4">気になる求人はありましたか？</h2>
+            <p className="text-gray-400 mb-8">まずは高野秀敏との無料キャリア相談から。あなたに合った求人をご提案します。</p>
+            <a href="https://keyplayers.jp" target="_blank" rel="noopener noreferrer"
+               className="inline-block px-8 py-4 rounded-lg font-semibold text-white transition-all hover:opacity-90"
+               style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
+              無料キャリア相談を申し込む
+            </a>
           </div>
         </div>
       </section>
@@ -187,7 +189,7 @@ export default async function HomePage({
                 <span className="text-white">DIRECT</span>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed">
-                11,000件以上のキャリア面談実績を持つ高野秀敏が運営する、スタートアップ・ベンチャー特化型の幹部採用プラットフォームです。
+                11,000件以上のキャリア面談実績を持つ高野秀敏が運営する、スタートアップ・ベンチャー特化型の転職支援プラットフォームです。
               </p>
               <div className="flex gap-4 mt-4">
                 {['Twitter', 'LinkedIn', 'Facebook'].map((social) => (
