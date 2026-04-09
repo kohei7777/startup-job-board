@@ -61,18 +61,18 @@ export default async function HomePage({
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6"
                style={{ backgroundColor: 'rgba(124, 58, 237, 0.15)', border: '1px solid rgba(168, 85, 247, 0.3)', color: '#c084fc' }}>
             <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-            スタートアップ・ベンチャー特化型 転職支援プラットフォーム
+            スタートアップ特化型 幹部転職プラットフォーム
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            次のキャリアを、<br />
+            幹部転職なら、<br />
             <span style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7, #c084fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              高野秀敏と一緒に。
+              キープレイヤーズダイレクト
             </span>
           </h1>
 
           <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
-            11,000件以上のキャリア面談実績を持つ高野秀敏が、あなたの転職を直接サポート。<br />
+            11,000件以上のキャリア面談実績を持つ高野秀敏が、あなたの幹部転職を直接サポート。<br />
             スタートアップ・ベンチャーの幹部ポジションに特化した求人をご紹介します。
           </p>
 
@@ -189,7 +189,7 @@ export default async function HomePage({
                 <span className="text-white">DIRECT</span>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed">
-                11,000件以上のキャリア面談実績を持つ高野秀敏が運営する、スタートアップ・ベンチャー特化型の転職支援プラットフォームです。
+                11,000件以上のキャリア面談実績を持つ高野秀敏が運営する、スタートアップ・ベンチャー特化型の幹部転職プラットフォームです。
               </p>
               <div className="flex gap-4 mt-4">
                 {['Twitter', 'LinkedIn', 'Facebook'].map((social) => (
