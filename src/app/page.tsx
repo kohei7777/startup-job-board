@@ -81,10 +81,10 @@ export default async function HomePage({
                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
               求人を見る
             </a>
-            <a href="https://keyplayers.jp" target="_blank" rel="noopener noreferrer"
+            <a href="/register"
                className="px-8 py-4 rounded-lg font-semibold text-white transition-all hover:bg-white/10"
                style={{ border: '1px solid rgba(255,255,255,0.3)' }}>
-              無料キャリア相談
+              スカウト登録（無料）
             </a>
           </div>
         </div>
@@ -167,11 +167,11 @@ export default async function HomePage({
         <div className="max-w-3xl mx-auto text-center">
           <div className="rounded-2xl p-12" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(168, 85, 247, 0.1))', border: '1px solid rgba(168, 85, 247, 0.3)' }}>
             <h2 className="text-3xl font-bold text-white mb-4">気になる求人はありましたか？</h2>
-            <p className="text-gray-400 mb-8">まずは高野秀敏との無料キャリア相談から。あなたに合った求人をご提案します。</p>
-            <a href="https://keyplayers.jp" target="_blank" rel="noopener noreferrer"
+            <p className="text-gray-400 mb-8">スカウト登録をすれば、高野が直接あなたに合う求人を紹介します。</p>
+            <a href="/register"
                className="inline-block px-8 py-4 rounded-lg font-semibold text-white transition-all hover:opacity-90"
                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
-              無料キャリア相談を申し込む
+              スカウト登録する（無料・審査制）
             </a>
           </div>
         </div>
