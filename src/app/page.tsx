@@ -1,4 +1,4 @@
-import sql from '@/lib/db'
+import sql, { getPool } from '@/lib/db'
 import JobCard from '@/components/JobCard'
 import JobFilters from '@/components/JobFilters'
 import { Suspense } from 'react'
@@ -46,7 +46,8 @@ async function getJobs(searchParams: SearchParams) {
   const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : ''
   const query = `SELECT * FROM "Job" ${where} ORDER BY featured DESC, "createdAt" DESC`
 
-  const rows = await sql(query, values)
+  const pool = getPool()
+  const { rows } = await pool.query(query, values)
   return rows
 }
 
