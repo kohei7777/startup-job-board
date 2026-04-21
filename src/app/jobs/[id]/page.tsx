@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import sql from '@/lib/db'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ApplicationForm from '@/components/ApplicationForm'
@@ -26,11 +26,8 @@ const tagColors: Record<string, string> = {
 
 export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const { data: job } = await supabase
-    .from('Job')
-    .select('*')
-    .eq('id', parseInt(id))
-    .single()
+  const rows = await sql`SELECT * FROM "Job" WHERE id = ${parseInt(id)} LIMIT 1`
+  const job = rows[0]
 
   if (!job) {
     notFound()

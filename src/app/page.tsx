@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import sql from '@/lib/db'
 import JobCard from '@/components/JobCard'
 import JobFilters from '@/components/JobFilters'
 import { Suspense } from 'react'
@@ -13,33 +13,41 @@ interface SearchParams {
 }
 
 async function getJobs(searchParams: SearchParams) {
-  let query = supabase
-    .from('Job')
-    .select('*')
-    .order('featured', { ascending: false })
-    .order('createdAt', { ascending: false })
+  const conditions: string[] = []
+  const values: (string | number)[] = []
+  let i = 1
 
   if (searchParams.keyword) {
-    query = query.or(
-      `title.ilike.%${searchParams.keyword}%,company.ilike.%${searchParams.keyword}%,description.ilike.%${searchParams.keyword}%`
-    )
+    conditions.push(`(title ILIKE $${i} OR company ILIKE $${i} OR description ILIKE $${i})`)
+    values.push(`%${searchParams.keyword}%`)
+    i++
   }
   if (searchParams.jobType) {
-    query = query.eq('jobType', searchParams.jobType)
+    conditions.push(`"jobType" = $${i}`)
+    values.push(searchParams.jobType)
+    i++
   }
   if (searchParams.industry) {
-    query = query.eq('industry', searchParams.industry)
+    conditions.push(`industry = $${i}`)
+    values.push(searchParams.industry)
+    i++
   }
   if (searchParams.salary) {
-    query = query.gte('salaryMin', parseInt(searchParams.salary))
+    conditions.push(`"salaryMin" >= $${i}`)
+    values.push(parseInt(searchParams.salary))
+    i++
   }
   if (searchParams.stage) {
-    query = query.eq('stage', searchParams.stage)
+    conditions.push(`stage = $${i}`)
+    values.push(searchParams.stage)
+    i++
   }
 
-  const { data, error } = await query
-  if (error) throw new Error(error.message)
-  return data ?? []
+  const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : ''
+  const query = `SELECT * FROM "Job" ${where} ORDER BY featured DESC, "createdAt" DESC`
+
+  const rows = await sql(query, values)
+  return rows
 }
 
 export default async function HomePage({

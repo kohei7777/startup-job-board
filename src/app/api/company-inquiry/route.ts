@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import sql from '@/lib/db'
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,23 +10,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: '必須項目を入力してください' }, { status: 400 })
     }
 
-    const { error } = await supabase.from('CompanyInquiry').insert([
-      {
-        company,
-        name,
-        email,
-        phone: phone || null,
-        position,
-        headcount: headcount || null,
-        message: message || null,
-        createdAt: new Date().toISOString(),
-      },
-    ])
-
-    if (error) {
-      console.error('Supabase error:', error)
-      return NextResponse.json({ error: 'DB保存に失敗しました' }, { status: 500 })
-    }
+    await sql`
+      INSERT INTO "CompanyInquiry" (company, name, email, phone, position, headcount, message, "createdAt")
+      VALUES (${company}, ${name}, ${email}, ${phone || null}, ${position}, ${headcount || null}, ${message || null}, NOW())
+    `
 
     return NextResponse.json({ success: true })
   } catch (err) {
