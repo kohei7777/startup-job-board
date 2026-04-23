@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import sql from '@/lib/db'
 import { Resend } from 'resend'
+import { appendCandidateToSheet } from '@/lib/sheets'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -166,7 +167,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: '必須項目を入力してください' }, { status: 400 })
     }
 
-    await sql`
+    const inserted = await sql`
       INSERT INTO "Candidate" (
         name, email, "currentCompany", "currentTitle",
         "desiredPosition", industry, experience,
@@ -179,15 +180,28 @@ export async function POST(req: NextRequest) {
         ${skills || null}, ${timing || null}, ${message || null},
         'pending', NOW()
       )
+      RETURNING id
     `
+    const candidateId = inserted[0]?.id as number
 
-    // メール送信（失敗しても登録は成功扱い）
+    // メール送信 & Sheets同期（失敗しても登録は成功扱い）
+    const tasks: Promise<any>[] = []
     if (process.env.RESEND_API_KEY) {
-      await Promise.allSettled([
+      tasks.push(
         sendConfirmationEmail(email, name, desiredPosition),
         sendNotificationEmail({ name, email, currentCompany, currentTitle, desiredPosition, industry, experience, salaryMin, salaryDesired, skills, timing, message }),
-      ])
+      )
     }
+    tasks.push(
+      appendCandidateToSheet({
+        id: candidateId, name, email, currentCompany, currentTitle,
+        desiredPosition, industry, experience,
+        salaryMin: salaryMin ? parseInt(salaryMin) : null,
+        salaryDesired: salaryDesired ? parseInt(salaryDesired) : null,
+        skills, timing, message,
+      }),
+    )
+    await Promise.allSettled(tasks)
 
     return NextResponse.json({ success: true })
   } catch (err: any) {
